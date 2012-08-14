@@ -226,7 +226,7 @@
             var arr = (prop === _undefined) ? this.items : JSLINQ(this.items).Select(function (x) { return x[prop]; }).items;
             return JSLINQ(arr).OrderBy(function (x) { return x; }).Last();
         },
-		Average: function (prop, numberOfDecimalPlaces) {
+        Average: function (prop, numberOfDecimalPlaces) {
             var arr = (prop === _undefined || prop === null) ? this.items : JSLINQ(this.items).Select(function (x) { return x[prop]; }).items;
             var result = 0;
             var sum = 0;
