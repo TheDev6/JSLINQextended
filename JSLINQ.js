@@ -215,7 +215,7 @@
                         return result;
                     }
                 }
-                return 0;
+				return 0;
             };
             return JSLINQ(this.items.sort(sortFunc));
         },
@@ -226,6 +226,25 @@
         Max: function (prop) {
             var arr = (prop === _undefined) ? this.items : JSLINQ(this.items).Select(function (x) { return x[prop]; }).items;
             return JSLINQ(arr).OrderBy(function (x) { return x; }).Last();
+        },
+        Average: function (prop, numberOfDecimalPlaces) {
+            var arr = (prop === _undefined || prop === null) ? this.items : JSLINQ(this.items).Select(function (x) { return x[prop]; }).items;
+            var result = 0;
+            var sum = 0;
+            var count = 0;
+            for (var i = 0; i < arr.length; i += 1) {
+                if (typeof (arr[i]) === typeof (1)) {
+                    sum += arr[i];
+                    count += 1;
+                }
+            }
+            result = (sum / count);
+            if (numberOfDecimalPlaces !== _undefined) {
+                if (typeof (numberOfDecimalPlaces) === typeof (1)) {
+                    result = Math.round(result * Math.pow(10, numberOfDecimalPlaces)) / Math.pow(10, numberOfDecimalPlaces);
+                }
+            }
+            return result;
         }
     };
     JSLINQ.fn.init.prototype = JSLINQ.fn;
